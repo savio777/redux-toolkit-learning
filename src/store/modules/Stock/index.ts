@@ -16,10 +16,14 @@ const stock = createSlice({
     incrementCounter(state, action: PayloadAction<{counter: number}>) {
       state.counter += action.payload.counter;
     },
+    decrementCounter(state, action: PayloadAction<{counter: number}>) {
+      state.counter -= action.payload.counter;
+    },
   },
 });
 
-export const {decrement, increment, incrementCounter} = stock.actions;
+export const {decrement, increment, incrementCounter, decrementCounter} =
+  stock.actions;
 
 export default stock.reducer;
 
@@ -49,5 +53,14 @@ export function asyncIncrementCounter(
   return async function (dispatch: AppDispatch) {
     await sleep();
     dispatch(incrementCounter({counter: action.payload.counter}));
+  };
+}
+
+export function asyncDecrementCounter(
+  action: PayloadAction<{counter: number}>,
+): AppThunk {
+  return async function (dispatch: AppDispatch) {
+    await sleep();
+    dispatch(decrementCounter({counter: action.payload.counter}));
   };
 }

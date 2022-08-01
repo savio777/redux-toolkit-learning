@@ -11,6 +11,8 @@ import {
   asyncDecrement,
   incrementCounter,
   asyncIncrementCounter,
+  asyncDecrementCounter,
+  decrementCounter,
 } from './src/store/modules/Stock';
 
 const styles = StyleSheet.create({
@@ -62,20 +64,37 @@ const App = () => {
           onPress={() => dispatch(asyncDecrement())}>
           <Text style={styles.textButton}>sleep -</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => dispatch(asyncIncrement())}>
+          <Text style={styles.textButton}>sleep +</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.containerButtons}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => dispatch(decrementCounter({counter}))}>
+          <Text style={styles.textButton}>- {counter}</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => dispatch(incrementCounter({counter}))}>
           <Text style={styles.textButton}>+ {counter}</Text>
         </TouchableOpacity>
+      </View>
+
+      <View style={styles.containerButtons}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => dispatch(asyncDecrementCounter({payload: {counter}}))}>
+          <Text style={styles.textButton}>sleep - {counter}</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => dispatch(asyncIncrementCounter({payload: {counter}}))}>
           <Text style={styles.textButton}>sleep + {counter}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => dispatch(asyncIncrement())}>
-          <Text style={styles.textButton}>sleep +</Text>
         </TouchableOpacity>
       </View>
     </View>
