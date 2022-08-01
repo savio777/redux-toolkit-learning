@@ -9,6 +9,8 @@ import {
   increment,
   asyncIncrement,
   asyncDecrement,
+  incrementCounter,
+  asyncIncrementCounter,
 } from './src/store/modules/Stock';
 
 const styles = StyleSheet.create({
@@ -59,6 +61,16 @@ const App = () => {
           style={styles.button}
           onPress={() => dispatch(asyncDecrement())}>
           <Text style={styles.textButton}>sleep -</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => dispatch(incrementCounter({counter}))}>
+          <Text style={styles.textButton}>+ {counter}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => dispatch(asyncIncrementCounter({payload: {counter}}))}>
+          <Text style={styles.textButton}>sleep + {counter}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}

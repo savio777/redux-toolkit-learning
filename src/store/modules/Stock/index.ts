@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppDispatch, AppThunk} from '../..';
 
 const stock = createSlice({
@@ -13,10 +13,13 @@ const stock = createSlice({
     decrement(state) {
       state.counter -= 1;
     },
+    incrementCounter(state, action: PayloadAction<{counter: number}>) {
+      state.counter += action.payload.counter;
+    },
   },
 });
 
-export const {decrement, increment} = stock.actions;
+export const {decrement, increment, incrementCounter} = stock.actions;
 
 export default stock.reducer;
 
@@ -37,5 +40,14 @@ export function asyncIncrement(): AppThunk {
   return async function (dispatch: AppDispatch) {
     await sleep();
     dispatch(increment());
+  };
+}
+
+export function asyncIncrementCounter(
+  action: PayloadAction<{counter: number}>,
+): AppThunk {
+  return async function (dispatch: AppDispatch) {
+    await sleep();
+    dispatch(incrementCounter({counter: action.payload.counter}));
   };
 }
