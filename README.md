@@ -7,3 +7,4 @@
 - reducer
 - actions com parâmetro
 - actions com parâmetro async
+- persist
