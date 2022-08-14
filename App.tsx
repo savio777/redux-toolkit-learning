@@ -2,8 +2,9 @@ import React from 'react';
 
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {Provider, useDispatch, useSelector} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
-import store, {RootState} from './src/store';
+import store, {persistor, RootState} from './src/store';
 import {
   decrement,
   increment,
@@ -103,6 +104,8 @@ const App = () => {
 
 export default () => (
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
